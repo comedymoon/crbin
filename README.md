@@ -2,20 +2,22 @@
 
 `crbin` (Clearly Random Binary) is a small utility that executes a randomly
 chosen executable file from a configurable set of directories. The program
-performs no filtering, validation, or safety checks, and simply invokes the
-selected binary with any arguments passed to `crbin`.
+randomly chooses a binary from default or provided directories and
+simply invokes theselected binary with any arguments passed to `crbin`.
 
 ## Overview
 
 On each invocation, `crbin`:
 
 1. Scans one or more filesystem directories for executable regular files.
-2. Selects one entry uniformly at random.
-3. Executes the selected path via `execvp(3)`.
+2. Chooses one random binary entry.
+3. Executes the chosen path.
 
-If execution fails, `crbin` exits with status code `1`.  
-`crbin` generates no output of its own; all visible behavior originates from
-the executed program.
+## Usage
+
+```
+crbin [arguments...]
+```
 
 ## Directory Selection
 
@@ -62,8 +64,8 @@ export RECURSE=1
 
 ## Argument Forwarding
 
-All arguments supplied to `crbin` are forwarded unchanged to the randomly
-selected executable.
+All arguments provided to `crbin` are forwarded unchanged to the randomly
+chosen executable.
 
 Example:
 
@@ -95,14 +97,6 @@ User-local installation:
 install -m 755 crbin "$HOME/.local/bin/crbin"
 ```
 
-Ensure `$HOME/.local/bin` is present in `PATH` if using the user-local option.
-
-## Usage
-
-```
-crbin [arguments...]
-```
-
 Examples:
 
 ```
@@ -113,11 +107,11 @@ BINDIRECTORIES="/bin" crbin
 RECURSE=1 crbin
 ```
 
-## Notes
+## Warning
 
 `crbin` intentionally implements no protection against executing programs that
 may modify system state, terminate the current session, or affect running
-processes. Running `crbin` as `root` or via `sudo` is strongly discouraged.
+processes. Running `crbin` as `root` or via `sudo` is strongly unrecommended.
 
 ## License
 
