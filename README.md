@@ -1,7 +1,7 @@
 # crbin
 
 `crbin` (Clearly Random Binary) is a small utility that executes a randomly
-selected executable file from a configurable set of directories. The program
+chosen executable file from a configurable set of directories. The program
 performs no filtering, validation, or safety checks, and simply invokes the
 selected binary with any arguments passed to `crbin`.
 
@@ -22,14 +22,12 @@ the executed program.
 By default, the following directories are scanned:
 
 ```
-
 /bin
 /usr/bin
 /usr/local/bin
 /sbin
 /usr/sbin
 /usr/local/sbin
-
 ```
 
 Scanning is non-recursive unless explicitly enabled.
@@ -39,15 +37,12 @@ Scanning is non-recursive unless explicitly enabled.
 ### `BINDIRECTORIES`
 
 Overrides the default directory list.
-
 Value must be a comma-separated list of absolute paths.
 
 Example:
 
 ```
-
 export BINDIRECTORIES="/bin,/usr/bin,/home/user/tools"
-
 ```
 
 ### `RECURSE`
@@ -55,18 +50,14 @@ export BINDIRECTORIES="/bin,/usr/bin,/home/user/tools"
 Controls recursive traversal.
 
 ```
-
 RECURSE=1       enable recursion
-RECURSE unset   disable recursion (default)
-
+RECURSE=unset   disable recursion (default)
 ```
 
 Example:
 
 ```
-
 export RECURSE=1
-
 ```
 
 ## Argument Forwarding
@@ -77,9 +68,7 @@ selected executable.
 Example:
 
 ```
-
 crbin --version
-
 ```
 
 The executed binary receives `--version` regardless of whether it supports it.
@@ -89,9 +78,7 @@ The executed binary receives `--version` regardless of whether it supports it.
 A C compiler such as GCC or Clang is required.
 
 ```
-
 gcc crbin.c -o crbin
-
 ```
 
 ## Installation
@@ -99,17 +86,13 @@ gcc crbin.c -o crbin
 System-wide installation:
 
 ```
-
 sudo install -m 755 crbin /usr/local/bin/crbin
-
 ```
 
 User-local installation:
 
 ```
-
 install -m 755 crbin "$HOME/.local/bin/crbin"
-
 ```
 
 Ensure `$HOME/.local/bin` is present in `PATH` if using the user-local option.
@@ -117,21 +100,17 @@ Ensure `$HOME/.local/bin` is present in `PATH` if using the user-local option.
 ## Usage
 
 ```
-
 crbin [arguments...]
-
 ```
 
 Examples:
 
 ```
-
 crbin
 crbin --help
 crbin -rf /
 BINDIRECTORIES="/bin" crbin
 RECURSE=1 crbin
-
 ```
 
 ## Notes
